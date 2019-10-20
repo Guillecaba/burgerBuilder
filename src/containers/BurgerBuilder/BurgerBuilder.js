@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Auxi from '../../hoc/Auxi'
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 const INGREDIENT_PRICES = {
     lechuga:0.5,
@@ -20,7 +22,8 @@ class BurgerBuilder extends Component {
             carne:0
         },
         totalPrice: 4,
-        comprable: false
+        comprable: false,
+        comprando:false
     }
 
     updateComprableState (ingredients) {
@@ -32,6 +35,10 @@ class BurgerBuilder extends Component {
                 return sum + el ;
             } , 0)
         this.setState({comprable: sum > 0})
+    }
+
+    comprandoHandler = () => {
+        this.setState({comprando:true});
     }
 
     addIngredientHandler = (type) => {
@@ -75,6 +82,9 @@ class BurgerBuilder extends Component {
         // {luchuga:true,bacon:false,..}
         return(
             <Auxi>
+                <Modal show={this.state.comprando}>
+                    <OrderSummary ingredients={this.state.ingredients} />
+                </Modal>
                 <Burger ingredients={this.state.ingredients} />
                 <BuildControls
                     ingredientAdded= {this.addIngredientHandler}
@@ -82,6 +92,8 @@ class BurgerBuilder extends Component {
                     disabled={disabledInfo}
                     purchasabled={this.state.comprable}
                     price={this.state.totalPrice}
+                    comprando={this.state.comprando}
+                    pedido={this.comprandoHandler}
                 />
                 </Auxi>
 
