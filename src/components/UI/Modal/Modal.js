@@ -17,9 +17,6 @@ class Modal extends Component {
   }
 
   render() {
-
-    
-
     return (
       <Auxi>
         <Backdrop show={this.props.show} clicked={this.props.modalClosed} />
