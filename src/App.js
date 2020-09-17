@@ -8,7 +8,7 @@ import Orders from './containers/Orders/Orders';
 
 function App() {
   return (
-    <div >
+    <div>
       <Layout>
         <Switch>
           <Route path="/checkout" component={Checkout} />
