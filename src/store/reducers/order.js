@@ -1,12 +1,20 @@
-import * as actionTypes from '../actions/actionTypes';
+import * as actionTypes from '../actions/actionsTypes';
 
 const initialState = {
     order: [],
-    loading:false
+    loading:false,
+    purchased: false
 };
 
 const reducer  = (state = initialState, action) => {
+    console.log('reducer order',action.type)
+    console.log('action',action)
     switch(action.type) {
+        case actionTypes.PURCHASE_INIT:
+            return {
+                ...state,
+                purchased:false
+            };
         case actionTypes.PURCHASE_BURGUER_START:
             return {
                 ...state,
@@ -20,7 +28,8 @@ const reducer  = (state = initialState, action) => {
             return {
                 ...state,
                 loading:false,
-                order: state.orders.concat(newOrder)
+                purchased: true,
+                order: state.order.concat(newOrder)
             };
         case actionTypes.PURCHASE_BURGUER_FAIL:
             return {
