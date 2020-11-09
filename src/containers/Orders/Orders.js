@@ -6,8 +6,6 @@ import axios from '../../axios-orders';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../store/actions/index';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import order from '../../components/Order/Order';
-
 class Orders extends Component {
     componentDidMount() {
         this.props.onFetchOrders();
@@ -18,7 +16,8 @@ class Orders extends Component {
         if (!this.props.loading) {
             orders = (this.props.orders.map(order => (
                 <Order key={order.id} ingredients={order.ingredients} price={+order.price} />
-            )))
+            )
+            ))
         }
         return (
             <div>
